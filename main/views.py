@@ -1,34 +1,62 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
+
 # Create your views here.
 
-def base(request):
+
+
+def base(request):      #   Base template / Базовый шаблон 
     sub_category_navbar = sub_category.objects.all
     catigories_navbar = category.objects.all
-    return render(request, 'main/base.html', {'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar})
 
-def index(request):
+    context = {
+        'sub_category_navbar' : sub_category_navbar,
+        'catigories_navbar' : catigories_navbar,
+    }
+
+    return render(request, 'main/base.html', context = context)
+
+
+
+
+def index(request):     #   main template / Домашняя страница
     sub_category_navbar = sub_category.objects.all
     catalog_mainpage = catalog.objects.order_by('-id')[:4]
     furnite_mainpage = Furnite.objects.order_by('-id')[:4]
     catigories_navbar = category.objects.all
     furnite_navbar = Furnite_category.objects.all
-    return render(request, 'main/index.html', {'catalog_mainpage': catalog_mainpage, 'catigories_navbar':catigories_navbar, 'sub_category_navbar':sub_category_navbar, 'furnite_mainpage': furnite_mainpage})
+    furnite_sub_category_navbar = Furnite_sub_category.objects.all
+
+    context = {
+        'sub_category_navbar':sub_category_navbar,
+        'catalog_mainpage':catalog_mainpage,
+        'furnite_mainpage':furnite_mainpage,
+        'catigories_navbar':catigories_navbar,
+        'furnite_navbar':furnite_navbar,
+        'furnite_sub_category_navbar':furnite_sub_category_navbar,
+    }
+
+    return render(request, 'main/index.html', context=context)
 
 
-def all_items(request):
+
+
+def sizes(request):     #   size template / Страница оформления замеров
     sub_category_navbar = sub_category.objects.all
     catigories_navbar = category.objects.all
-    all_items_page = catalog.objects.filter(category_id = '1')
-    return render(request, 'main/all_items.html', {'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar, 'all_items_page': all_items_page})
 
-def sizes(request):
-    sub_category_navbar = sub_category.objects.all
-    catigories_navbar = category.objects.all
-    return render(request, 'main/sizes.html', {'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar})
+    context = {
+        'sub_category_navbar' : sub_category_navbar,
+        'catigories_navbar' : catigories_navbar,
+    }
 
-def show_post(request, post_slug):
+    return render(request, 'main/sizes.html', context = context)
+
+
+
+
+def show_post(request, post_slug):      #   door post template / Страница товара (дверь)
 
     post = get_object_or_404(catalog, slug=post_slug)
     catalog_post = catalog.objects.all
@@ -36,21 +64,37 @@ def show_post(request, post_slug):
     sub_category_navbar = sub_category.objects.all
 
     context = {
-        'post' : post
+        'post' : post,
+        'catalog_post' : catalog_post,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
     }
 
-    return render(request, 'main/post.html', {'post': post, 'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar,},)
+    return render(request, 'main/post.html', context=context)
 
-def show_furnite(request, furnite_slug):
+
+
+
+def show_furnite(request, furnite_slug):        #   furnite post template / Страница товара (фурнитура)
 
     furnite = get_object_or_404(Furnite, slug=furnite_slug)
     furnite_post = Furnite.objects.all
     catigories_navbar = category.objects.all
     sub_category_navbar = sub_category.objects.all
 
-    return render(request, 'main/furnite.html', {'furnite': furnite, 'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar})
+    context = {
+        'furnite' : furnite,
+        'furnite_post' : furnite_post,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
+    }
 
-def show_category(request, category_slug):
+    return render(request, 'main/furnite.html', context = context)
+
+
+
+
+def show_category(request, category_slug):      #   category list / Список товара одной категории (двери)
 
     incategory = get_object_or_404(category, slug=category_slug)
     category_catalog = catalog.objects.order_by('-id')
@@ -58,16 +102,76 @@ def show_category(request, category_slug):
     sub_category_navbar = sub_category.objects.all
 
     context = {
-        'incategory' : incategory
+        'incategory' : incategory,
+        'category_catalog' : category_catalog,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
     }
 
-    return render(request, 'main/category.html', {'incategory': incategory, 'catigories_navbar': catigories_navbar, 'category_catalog': category_catalog, 'sub_category_navbar':sub_category_navbar})
+    return render(request, 'main/category.html', context = context)
 
-def show_sub_category(request, sub_category_slug):
+
+
+
+def show_furnite_category(request, furnite_category_slug):
+
+    incategory = get_object_or_404(Furnite_category, slug=furnite_category_slug)
+    furnite = Furnite.objects.order_by('-id')
+    category_catalog = catalog.objects.order_by('-id')
+    catigories_navbar = category.objects.all
+    sub_category_navbar = sub_category.objects.all
+    furnite_navbar = Furnite_category.objects.all
+    furnite_sub_category_navbar = Furnite_sub_category.objects.all
+    
+
+    context = {
+        'incategory' : incategory,
+        'furnite' : furnite,
+        'category_catalog' : category_catalog,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
+        'furnite_navbar' : furnite_navbar,
+        'furnite_sub_category_navbar' : furnite_sub_category_navbar
+    }
+
+    return render(request, 'main/furnite_category.html', context = context)
+
+
+def show_sub_category(request, sub_category_slug):      #   sub_category list / Список товара одной подкатегории (двери)
 
     subcategory = get_object_or_404(sub_category, slug=sub_category_slug)
     catigories_navbar = category.objects.all
     sub_category_navbar = sub_category.objects.all
     subcategory_catalog = catalog.objects.order_by('-id')
+    
 
-    return render(request, 'main/subcategory.html', {'subcategory': subcategory, 'catigories_navbar': catigories_navbar, 'sub_category_navbar':sub_category_navbar, 'subcategory_catalog':subcategory_catalog})
+    context = {
+        'subcategory' : subcategory,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
+        'subcategory_catalog' : subcategory_catalog,
+    }
+
+    return render(request, 'main/subcategory.html', context = context)
+
+
+
+
+def show_furnite_sub_category(request, sub_category_slug):
+
+    subcategory = get_object_or_404(Furnite_sub_category, slug=sub_category_slug)
+    furnite = Furnite.objects.order_by('-id')
+    catigories_navbar = category.objects.all
+    sub_category_navbar = sub_category.objects.all
+    subcategory_catalog = catalog.objects.order_by('-id')
+    
+
+    context = {
+        'subcategory' : subcategory,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
+        'subcategory_catalog' : subcategory_catalog,
+        'subcategory_catalog' : subcategory_catalog
+    }
+
+    return render(request, 'main/subcategory.html', context = context)

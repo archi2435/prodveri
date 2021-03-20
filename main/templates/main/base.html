@@ -38,6 +38,14 @@
         <li class="nav-item pl-1 border  border-gray shadow-sm">
             <a class="nav-link" aria-current="page" href="#"><b>фурнитура</b></a>
         </li>
+      {% for fu in furnite_navbar %}
+        <li class="nav-item  pl-3 "><a class="nav-link" href="{{ fu.get_absolute_url }}">{{ fu.title }}</a></li>
+        {% for fu_sub in furnite_sub_category_navbar %}
+            {% if fu.id == fu_sub.category_id %}
+                <li class="nav-item pl-4 "><a class="nav-link " href="#">{{fu_sub.title}}</a></li>
+            {% endif %}
+        {% endfor %}
+      {% endfor %}
     </ul>
   </nav>
 

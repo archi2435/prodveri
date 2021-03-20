@@ -5,7 +5,8 @@ from django.urls import reverse
 User = get_user_model()
 # Create your models here.
 
-class category(models.Model):
+
+class category(models.Model):       #   category table / таб категорий 
 
     title = models.CharField(verbose_name='Название категории', max_length=255)
     slug = models.SlugField(unique=True)
@@ -21,7 +22,9 @@ class category(models.Model):
         verbose_name_plural = 'Категории'
 
 
-class sub_category(models.Model):
+
+
+class sub_category(models.Model):       #   sub_category list / таб подкатегорий
 
     category = models.ForeignKey(category, verbose_name='Категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='Подкатегория', max_length=100)
@@ -39,7 +42,8 @@ class sub_category(models.Model):
 
 
 
-class catalog(models.Model):
+
+class catalog(models.Model):        #   catalog list / список товара
 
     category = models.ForeignKey(category, verbose_name='Категория', on_delete=models.CASCADE)
     sub_category = models.ForeignKey(sub_category, verbose_name="Подкатегория", on_delete=models.CASCADE, null=True, blank=True)
@@ -61,7 +65,8 @@ class catalog(models.Model):
 
 
 
-class CartProduct(models.Model):
+
+class CartProduct(models.Model):        #   product in cart / товар для корзины
 
     user = models.ForeignKey('Customer', verbose_name='Покупатель', on_delete=models.CASCADE)
     cart = models.ForeignKey('Cart', verbose_name='Корзина', on_delete=models.CASCADE)
@@ -74,7 +79,8 @@ class CartProduct(models.Model):
 
 
 
-class cart(models.Model):
+
+class cart(models.Model):       #   cart tab / таб корзины
 
     owner = models.ForeignKey('Customer', verbose_name='Владелец', on_delete=models.CASCADE)
     products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
@@ -86,7 +92,8 @@ class cart(models.Model):
 
 
 
-class Customer(models.Model):
+
+class Customer(models.Model):       #   custom user tab / таб пользователя
 
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     phone = models.CharField(verbose_name='Номер телефона', max_length=15)
@@ -96,7 +103,9 @@ class Customer(models.Model):
 
 
 
-class Sizes(models.Model):
+
+class Sizes(models.Model):      #   size ticets / таб заявок для замеров
+    
     f_name = models.CharField(verbose_name='Имя', max_length=50)
     l_name = models.CharField(verbose_name='Отчество', max_length=50)
     phone = models.CharField(verbose_name='Номер телефона', max_length=15)
@@ -106,7 +115,8 @@ class Sizes(models.Model):
 
 
 
-class Furnite_category(models.Model):
+
+class Furnite_category(models.Model):       #   furnite categories / категории фурнитуры
 
     title = models.CharField(verbose_name='Название', max_length=50)
     slug = models.SlugField(unique=True)
@@ -120,9 +130,8 @@ class Furnite_category(models.Model):
     
 
 
-class Furnite_sub_category(models.Model):
-
-    
+class Furnite_sub_category(models.Model):       #   furnite sub_category / подкатегории фурнитуры
+   
     category = models.ForeignKey(Furnite_category, verbose_name='Категория', on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Подкатегория', max_length=100)
     slug = models.SlugField(unique=True)
@@ -135,7 +144,8 @@ class Furnite_sub_category(models.Model):
 
 
 
-class Furnite(models.Model):
+
+class Furnite(models.Model):        #   furnite catalog list / список фурнитуры
     
     category = models.ForeignKey(Furnite_category, verbose_name='Категория', on_delete=models.CASCADE)
     sub_category = models.ForeignKey(Furnite_sub_category, verbose_name="Подкатегория", on_delete=models.CASCADE,)
