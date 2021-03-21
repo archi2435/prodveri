@@ -111,7 +111,7 @@ class Sizes(models.Model):      #   size ticets / таб заявок для з�
     phone = models.CharField(verbose_name='Номер телефона', max_length=15)
 
     def __str__(self):
-        return '{} {}'.format(self.Sizes.f_name, self.Sizes.l_name)
+        return '{} {}'.format(self.f_name, self.l_name)
 
 
 

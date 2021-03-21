@@ -4,6 +4,22 @@
 
 {% block content %}
 
+    <!-- first block / первый (приветственный) блок -->
+    <h3 class="pb-4 lead text-center" style="font-size: 2.2em;"><b>Добро пожаловать</b></h3>
+    <div class="row row-cols-1 row-cols-sm-2 pt-2">
+        <div class="col my-3 text-center">
+            <i class="bi bi-door-open" style="font-size: 2em;"></i>
+            <p class="pt-3 lead"><b>prodveri23</b></p>
+            <p class="lead">У нас вы встретите двери и фурнитуру различных видов. Размер ассортимента и доступные цены позволят вам остановится именно в нашем магазине.</p>
+        </div>
+        <div class="col my-3 text-center">
+            <i class="bi bi-geo-alt" style="font-size: 2em;"></i>
+            <p class="pt-4 lead"><b>Наш адрес:</b></p>
+            <p class="lead">г.Краснодар, ул.Российская 400/1</p>
+        </div>
+    </div>
+
+
     <!-- news block / Блок новостей -->
     <hr>
     <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новости</b></h3>
@@ -18,6 +34,15 @@
             </div>
         </div>
     {% endfor %}
+    </div>
+
+
+    <!-- payment information / информация об оплате -->
+    <hr>
+    <div class="container d-md-flex py-4 text-center">
+        <i class="bi bi-window-sidebar mr-3" style="font-size: 2.3em;"></i>
+        <p class="lead pt-4 pt-md-0">На сайте вы сможете ознакомится с нашей продукцией, обратиться за помощью при замере дверного пройёма,
+            доставке товара до адреса и монтажным работам</p>
     </div>
 
 
