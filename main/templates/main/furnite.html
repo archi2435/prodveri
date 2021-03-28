@@ -23,10 +23,22 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title display-4">{{ furnite.title }}</h5>
-          <p class="card-text">{{ furnite.dist }}</p>
-        </div>
-       
+          <div class="pt-sm-5 mt-sm-5" >
+            <button type="button" class="btn btn-lg btn-outline-primary mt-sm-5 mb-3  w-100">
+              <h4 class="lead" style="font-size: 1.5em;">Стоимость</h4>
+              <h4 class="lead" style="font-size: 1.4em;">{{ furnite.price }} ₽</h4>
+            </button>
+            <br>
+            <button type="button" class="btn btn-warning btn-lg mt-2 w-100">
+              <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
+            </button>
+          </div>
+          
+        </div>       
       </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ furnite.dist|linebreaks }}</p>
     </div>
     <div class="card-footer text-right">
         <h5 class="card-text"> Стоимость: {{ furnite.price }} RUB </h5>
