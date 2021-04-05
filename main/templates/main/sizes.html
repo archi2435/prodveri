@@ -1,27 +1,17 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <h3 id="hello-md">Необходимо узнать размеры дверного проёма?</h3>
-    <h4 id="hello-sm">Необходимо узнать размеры дверного проёма?</h4>
-    <p><b>Не беда, вы можете воспельзоваться нашей помощью, заполнив небольшую форму:</b></p>
-    <hr>
-    <form>
-        <div class="row">
-            <label for="exampleInputName1" class="form-label container-fluid">Как к вам обращаться?</label>
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Имя" id="exampleInputName1">
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Отчество" id="exampleInputLastname1">
-            </div>
-        </div>
-        <div class="py-3">
-            <label for="exampleInputPhoneNumber1" class="form-label">Как с вами связаться?</label>
-            <input type="number" class="form-control" placeholder="Номер телефона" id="exampleInputPhoneNumber1">
-        </div>
-        <button type="submit" class="btn btn-primary mb-3">Отправить</button>
-    </form>
-    <hr>
-    <p>Так же вы можете оставить заяку по телефону:<br><b>+7 (800) 555-35-35</b></p>
+    
+<h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новости</b></h3>
 
+<nav class="nav nav-pills justify-content-center pb-3">
+    {% for es in sub_category_navbar %}
+    {% if incategory.id == es.category_id %}
+        <li class="nav-item border rounded card-how-low px-2 m-1">
+            <a class="nav-link text-pimary lead"aria-current="page" href="{{ es.get_absolute_url }}"><b>{{ es.title }}</b></a>
+        </li>
+    {% endif %}
+    {% endfor %}
+</nav>
+  
 {% endblock %}

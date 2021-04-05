@@ -55,6 +55,21 @@ def sizes(request):     #   size template / Страница оформлени�
 
 
 
+def news(request):
+
+    sub_category_navbar = sub_category.objects.all
+    catigories_navbar = category.objects.all
+    news = News.objects.order_by('-id')
+
+    context = {
+        'sub_category_navbar' : sub_category_navbar,
+        'catigories_navbar' : catigories_navbar,
+        'news' : news,
+    }
+
+    return render(request, 'main/news.html', context = context)
+
+
 
 def show_post(request, post_slug):      #   door post template / Страница товара (дверь)
 
@@ -158,6 +173,27 @@ def show_sub_category(request, sub_category_slug):      #   sub_category list / 
 
     return render(request, 'main/subcategory.html', context = context)
 
+
+
+def show_collection(request, collection_slug):
+
+    incollections = get_object_or_404(collection, slug=collection_slug)
+    subcategory = sub_category.objects.all
+    catigories_navbar = category.objects.all
+    sub_category_navbar = sub_category.objects.all
+    collections_catalog = catalog.objects.order_by('-id')
+    collections = collection.objects.all
+
+    context = {
+        'incollections' : incollections,
+        'subcategory' : subcategory,
+        'catigories_navbar' : catigories_navbar,
+        'sub_category_navbar' : sub_category_navbar,
+        'collections_catalog' : collections_catalog,
+        'collections' : collections,
+    }
+
+    return render(request, 'main/collection.html', context = context)
 
 
 

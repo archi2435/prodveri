@@ -31,7 +31,7 @@
         {% for es in collections %}
         {% if es.sub_category_id == subcategory.id %}
             <li class="nav-item border rounded card-how-low px-2 m-1">
-                <a class="nav-link text-pimary lead" aria-current="page" href="#"><b>{{ es.title }}</b></a>
+                <a class="nav-link text-pimary lead" aria-current="page" href="{{ es.get_absolute_url }}"><b>{{ es.title }}</b></a>
             </li>
         {% endif %}
         {% endfor %}

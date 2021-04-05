@@ -30,7 +30,7 @@
       </div>
 
       {% for el in catigories_navbar %}
-        <li class="nav-item  pl-1 navit"><a class="nav-link lead" href="{{ el.get_absolute_url }}"><b>{{ el.title }}</b></a></li>
+        <li class="nav-item  pl-1"><a class="nav-link lead navit" href="{{ el.get_absolute_url }}"><b>{{ el.title }}</b></a></li>
         {% block sub_catigories %}{%endblock%}
       {% endfor %}
         <!--<li class="nav-item"><hr></li>-->
@@ -64,7 +64,7 @@
           <a class="nav-link pt-3 navit-down" aria-current="page" href="{% url 'home' %}">Главная</a>
         </li>
         <li class="nav-item  d-none d-md-block pl-1">
-          <a class="nav-link pt-3 navit-down" aria-current="page" href="{% url 'home' %}">Новости</a>
+          <a class="nav-link pt-3 navit-down" aria-current="page" href="{% url 'news' %}">Новости</a>
         </li>
         <li class="nav-item  d-none d-md-block pl-1">
           <a class="nav-link pt-3 navit-down" href="{% url 'sizes' %}">Снять замеры</a>

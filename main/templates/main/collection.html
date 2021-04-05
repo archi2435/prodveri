@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+    <!-- nav block / блок навигации -->
+    <nav aria-label="breadcrumb" class="bg-light mb-5 card-how-low rounded">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ incollections.title }}</li>
+    </ol>
+    </nav>
+
+
+    <h1 class="lead text-center pb-5" style="font-size: 2em;">{{ incollections.title }}</h1>
+    
+
+
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 pb-4">
+        {% for i in collections_catalog %}
+        {% if incollections.id == i.collection_id %}
+            <div class="col my-3 ">
+                <div class="card card-how h-100">
+                    <a class="text-decoration-none" href="{{ i.get_absolute_url }}" data-bs-toggle="modal" style="color: black">
+                    <h5 class="card-header text-center lead "><b>{{ i.title }}</b></h5>
+                    <div class="card-body text-center">
+                        <div class="card__img">
+                            <img src="{{ i.image.url }}" class=" card__img-wrapper">
+                            {% if i.second_image %}
+                            <img src="{{ i.second_image.url }}" class=" card__img-wrapper">
+                            {% endif %}
+                        </div>
+                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price }} ₽</b></h5>
+                        
+                    </div>
+                    
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+
+    <nav aria-label="Page navigation example ">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+        </ul>
+    </nav>
+{% endblock content %}
