@@ -2,16 +2,22 @@
 
 {% block content %}
     
-<h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новости</b></h3>
+<h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Как снять замеры?</b></h3>
 
 <nav class="nav nav-pills justify-content-center pb-3">
-    {% for es in sub_category_navbar %}
-    {% if incategory.id == es.category_id %}
-        <li class="nav-item border rounded card-how-low px-2 m-1">
-            <a class="nav-link text-pimary lead"aria-current="page" href="{{ es.get_absolute_url }}"><b>{{ es.title }}</b></a>
-        </li>
-    {% endif %}
-    {% endfor %}
+    
+    <li class="nav-item border rounded card-how-low px-2 m-1">
+        <a class="nav-link text-pimary lead"aria-current="page" href="#"><b>Высота</b></a>
+    </li>
+    <li class="nav-item border rounded card-how-low px-2 m-1">
+        <a class="nav-link text-pimary lead"aria-current="page" href="#"><b>Ширина</b></a>
+    </li>
+    <li class="nav-item border rounded card-how-low px-2 m-1">
+        <a class="nav-link text-pimary lead"aria-current="page" href="#"><b>Глубина</b></a>
+    </li>
+    
 </nav>
+
+<h4 class="lead text-center"><b>Высота</b></h4>
   
 {% endblock %}
