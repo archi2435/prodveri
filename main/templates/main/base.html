@@ -21,12 +21,30 @@
       <a href="{% url 'home' %}" class=""><img src="{% static 'main/img/logo.png' %}" class="mt-4 sidelogo" style="height: 6em;" alt=""></a>
     </div>
     <ul class="nav navmenu-nav flex-column mt-3">
- 
+      
+      <!--
       <li class="nav-item lead d-sm-block d-md-none pl-1 navit"><a class="nav-link" href="{% url 'home' %}"><b>Главная</b></a></li>
       <li class="nav-item lead d-sm-block d-md-none pl-1 navit"><a class="nav-link" href="{% url 'home' %}"><b>Новости</b></a></li>
       <li class="nav-item lead d-sm-block d-md-none pl-1 navit"><a class="nav-link" href="{% url 'sizes' %}"><b>Снять замеры</b></a></li>
+      -->
 
-      <div class="container text-center mt-3">
+      <div class="container mt-4 text-left d-sm-block d-md-none">
+        <div class="btn-group-vertical w-100 rounded socialcard py-1 bg-light" role="group" aria-label="Basic example">
+  
+          <button type="button" class="btn btn-light text-left">
+            <a class="nav-link lead text-dark pl-2" href="{% url 'home' %}" style="font-size: 18px;"><b>Главная</b></a>
+          </button>
+          <button type="button" class="btn btn-light text-left">
+            <a class="nav-link lead text-dark pl-2" href="{% url 'home' %}" style="font-size: 18px;"><b>Новости</b></a>
+          </button>
+          <button type="button" class="btn btn-light text-left">
+            <a class="nav-link lead text-dark pl-2" href="{% url 'sizes' %}" style="font-size: 18px;"><b>Снять замеры</b></a>
+          </button>
+         
+        </div>
+      </div> 
+
+      <div class="container text-center mt-4">
         <div class="btn-group w-100 socialcard rounded btn-group-lg" role="group" aria-label="Basic example">
           <button type="button" class="btn pb-3 btn-light">
             <i class="bi bi-instagram" style="font-size: 26px;"></i>
@@ -40,33 +58,26 @@
         </div>
       </div>
 
-      <div class="container mt-4 text-center">
-        <div class="btn-group-vertical w-100 rounded socialcard" role="group" aria-label="Basic example">
+      <div class="container mt-4 text-left ">
+        <div class="btn-group-vertical w-100 rounded socialcard py-1 bg-light" role="group" aria-label="Basic example">
         {% for el in catigories_navbar %}
-          <button type="button" class="btn btn-light">
-            <a class="nav-link lead text-dark" href="{{ el.get_absolute_url }}" style="font-size: 18px;"><b>{{ el.title }}</b></a>
+          <button type="button" class="btn btn-light text-left">
+            <a class="nav-link lead text-dark pl-2" href="{{ el.get_absolute_url }}" style="font-size: 18px;"><b>{{ el.title }}</b></a>
           </button>
           {% block sub_catigories %}{%endblock%}
         {% endfor %}
-        <button type="button" class="btn btn-light">
-          <a class="nav-link lead text-dark" href="{% url 'all_furnite' %}" style="font-size: 18px"><b>Фурнитура</b></a>
+        <button type="button" class="btn btn-light text-left">
+          <a class="nav-link lead text-dark pl-2" href="{% url 'all_furnite' %}" style="font-size: 18px"><b>Фурнитура</b></a>
         </button>
-        
+        {% for fu in furnite_navbar %}
+        <button type="button" class="btn btn-light text-left">
+          <a class="nav-link lead text-dark pl-2" href="{{ fu.get_absolute_url }}" style="font-size: 18px;"><i class="bi bi-filter-right" style="font-size: 22px;"></i><b>{{ fu.title }}</b></a>
+        </button>
+        {% endfor %}  
         </div>
-        <!--<li class="nav-item"><hr></li>-->
       </div>  
           
-            {% for fu in furnite_navbar %}
-            <li class="nav-item lead pl-3 navit"><a class="nav-link"  href="{{ fu.get_absolute_url }}">{{ fu.title }}</a></li>
-            <!--  11
-            {% for fu_sub in furnite_sub_category_navbar %}
-                {% if fu.id == fu_sub.category_id %}
-                    <li class="nav-item pl-4 "><a class="nav-link " href="#">{{fu_sub.title}}</a></li>
-                {% endif %}
-            {% endfor %}
-            -->
-            {% endfor %}  
-          </ul>
+          
       </li>
 
     </ul>

@@ -1,32 +1,26 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
+
+
 {% block content %}
 
+    <!-- nav block / блок навигации -->
     <!-- nav block / блок навигации -->
     <nav aria-label="breadcrumb" class="bg-light mb-5 card-how-low rounded">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
         <li class="breadcrumb-item" aria-current="page"><a href="{% url 'all_furnite' %}">Фурнитура</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ incategory.title }}</li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{{ subcategory.category.get_absolute_url }}">{{ subcategory.category.title }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ subcategory.title }}</li>
     </ol>
     </nav>
 
-    <h3 class="lead text-center pb-5" style="font-size: 2em;">{{ incategory.title }}</h3>
-
-    <nav class="nav nav-pills justify-content-center pb-3">
-    {% for es in furnite_sub_category_navbar %}
-    {% if incategory.id == es.category_id %}
-        <li class="nav-item border rounded card-how-low px-2 m-1">
-            <a class="nav-link text-pimary lead"aria-current="page" href="{{ es.get_absolute_url }}"><b>{{ es.title }}</b></a>
-        </li>
-    {% endif %}
-    {% endfor %}
-    </nav>
-
+    <h5 class="lead text-center pb-5" style="font-size: 2em;">{{ subcategory.title }}</h5>
+    
     <div class="row row-cols-2 row-cols-lg-4 g-4">
-        {% for i in furnite %}
-        {% if incategory.id == i.category_id %}
+        {% for i in page_obj %}
+        
             <div class="col my-3 ">
                 <div class="card card-how h-100">
                     <a class="text-decoration-none" href="{{ i.get_absolute_url }}" data-bs-toggle="modal" style="color: black">
@@ -39,7 +33,10 @@
                     </a>
                 </div>
             </div>
-        {% endif %}
+        
         {% endfor %}
     </div>
+
+    {% include "main/pagination.html"%}
+
 {% endblock content %}

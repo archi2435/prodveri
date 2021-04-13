@@ -217,15 +217,17 @@ def show_collection(request, collection_slug):
 
 
 
-def show_furnite_sub_category(request, sub_category_slug):
+def show_furnite_subcategory(request, furnite_subcategory_slug):
 
-    subcategory = get_object_or_404(Furnite_sub_category, slug=sub_category_slug)
+    subcategory = get_object_or_404(Furnite_sub_category, slug=furnite_subcategory_slug)
     catigories_navbar = category.objects.all
     sub_category_navbar = sub_category.objects.all
+    furnite_navbar = Furnite_category.objects.all
+    furnite_sub_category_navbar = Furnite_sub_category.objects.all
     subcategory_catalog = catalog.objects.order_by('-id')
     furnite = Furnite.objects.filter(sub_category_id = subcategory.id)
     
-    paginator = Paginator(Furnite, 16)
+    paginator = Paginator(furnite, 16)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -238,7 +240,7 @@ def show_furnite_sub_category(request, sub_category_slug):
         'subcategory_catalog' : subcategory_catalog
     }
 
-    return render(request, 'main/subcategory.html', context = context)
+    return render(request, 'main/furnite_subcategory.html', context = context)
 
 
 

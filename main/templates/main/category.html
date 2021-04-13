@@ -6,8 +6,8 @@
     {% for es in sub_category_navbar %}
         {% if el.id == es.category_id %}
             {% if el.id == incategory.id %}
-            <button type="button" class="btn btn-light">
-                <a class="nav-link lead text-dark" href="{{ es.get_absolute_url }}" style="font-size: 18px;"><i class="bi bi-arrow-return-right" style="font-size: 20px;"></i><b> {{ es.title }}</b></a>
+            <button type="button" class="btn btn-light text-left">
+                <a class="nav-link lead text-dark" href="{{ es.get_absolute_url }}" style="font-size: 18px;"><i class="bi bi-filter-right" style="font-size: 22px;"></i><b>{{ es.title }}</b></a>
             </button>
             {% endif %}
         {% endif %}

@@ -125,7 +125,7 @@ class Furnite_sub_category(models.Model):       #   furnite sub_category / по�
         return self.title
 
     def get_absolute_url(self):
-        return reverse("furnite_sub_category", kwargs={"furnite_sub_category_slug": self.slug})    
+        return reverse("furnite_subcategory", kwargs={"furnite_subcategory_slug": self.slug})    
 
 
 
