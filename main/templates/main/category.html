@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block sub_catigories %}
 
@@ -79,7 +80,7 @@
                             <img src="{{ i.second_image.url }}" class=" card__img-wrapper">
                             {% endif %}
                         </div>
-                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price }} ₽</b></h5>
+                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price|intcomma }} ₽</b></h5>
                         
                     </div>
                     

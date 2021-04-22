@@ -23,8 +23,8 @@ def base(request):      #   Base template / Базовый шаблон
 
 def index(request):     #   main template / Домашняя страница
     sub_category_navbar = sub_category.objects.all
-    catalog_mainpage = catalog.objects.order_by('-id')[:4]
-    furnite_mainpage = Furnite.objects.order_by('-id')[:4]
+    catalog_mainpage = catalog.objects.order_by('-id')[:8]
+    furnite_mainpage = Furnite.objects.order_by('-id')[:8]
     catigories_navbar = category.objects.all
     furnite_navbar = Furnite_category.objects.all
     furnite_sub_category_navbar = Furnite_sub_category.objects.all
@@ -267,3 +267,5 @@ def all_furnite(request):
     }
 
     return render(request, 'main/all_furnite.html', context = context)
+
+

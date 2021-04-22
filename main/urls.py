@@ -16,5 +16,5 @@ urlpatterns = [
     path('furnite/<slug:furnite_slug>', views.show_furnite, name='furnite'),
     path('furnite_category/<slug:furnite_category_slug>', views.show_furnite_category, name='furnite_category'),
     path('furnite_subcategory/<slug:furnite_subcategory_slug>', views.show_furnite_subcategory, name='furnite_subcategory'),
-    path('collection/<slug:collection_slug>', views.show_collection, name='collection')
+    path('collection/<slug:collection_slug>', views.show_collection, name='collection'),
 ]

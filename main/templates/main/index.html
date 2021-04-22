@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load humanize %}
 
 
 {% block content %}
@@ -51,7 +52,7 @@
     <!-- news block / Блок новостей -->
     <hr>
     <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новости</b></h3>
-    <div class="row row-cols-1 row-cols-sm-2 g-4 pb-4">
+    <div class="row row-cols-1 row-cols-sm-2 pb-4">
     {% for n in news %}
         <div class="col my-3">
             <div class="card card-how h-100">
@@ -79,7 +80,7 @@
     <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новинки</b></h3>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 pb-4">
     {% for i in catalog_mainpage %}
-        <div class=" col g-0 my-3">
+        <div class=" col my-3">
             <div class="card card-how h-100"> 
                 <a class="text-decoration-none" href="{{ i.get_absolute_url }}" data-bs-toggle="modal" style="color: black">
                 <h5 class="card-header lead text-center"><b>{{ i.title }}</b></h5>
@@ -91,7 +92,7 @@
                         <img src="{{ i.second_image.url }}" class=" card__img-wrapper">
                         {% endif %}
                     </div>
-                    <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price }} ₽</b></h5>
+                    <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price|intcomma }} ₽</b></h5>
                 </div>
                 </a>
             </div>
@@ -103,7 +104,7 @@
     <!-- new furnite block / блок с новой фурнитурой -->
     <hr>
     <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Последняя фурнитура</b></h3>
-    <div class="row row-cols-2 row-cols-lg-4 g-4">
+    <div class="row row-cols-2 row-cols-lg-4">
         {% for fur in furnite_mainpage %}
             <div class="col my-3 ">
                 <div class="card card-how h-100">
@@ -112,7 +113,7 @@
                     <div class="card-body text-center ">
                         <img src="{{ fur.image.url }}" class="card-img-top pl-sm-5 pr-sm-5 pl-md-3 pr-md-3">
                         <h6 class="card-subtitle text-muted my-1  d-none d-sm-block">{{ fur.text }}</h6>
-                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ fur.price }} ₽</b></h5>
+                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ fur.price|intcomma }} ₽</b></h5>
                     </div>
                     </a>
                 </div>

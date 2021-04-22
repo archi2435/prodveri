@@ -20,6 +20,30 @@
 
 <h4 class="lead text-center"><b>Высота</b></h4>
 
+<div class="pt-5 mt-5 btn-group btn-group-md mt-5 mb-3 w-100 " role="group" aria-label="Basic outlined example"> 
+  <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" value="111">             
+  <label id="option1" class="btn btn-outline-primary rounded mr-1" for="option1">
+    <h4 class="lead" style="font-size: 1.5em;">За полотно</h4>
+    <h4 class="lead" style="font-size: 1.6em;"><b>123123</b></h4>
+  </label>
+  <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" value="222">
+  <label id="option2" class="btn btn-outline-primary rounded ml-1" for="option2">
+    <h4 class="lead" style="font-size: 1.5em;">За комплект</h4>
+    <h4 class="lead" style="font-size: 1.6em;"><b>345345345</b></h4>
+  </label>             
+</div>
+
+<p class="text-center">
+	<button id="btn" class="btn btn-sm btn-outline-dark">Получить value</button>
+</p>
+
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$('#btn').click(function(){
+	console.log($('input[name="options"]:checked').val());
+});
+</script>
+
 
 
 {% endblock %}

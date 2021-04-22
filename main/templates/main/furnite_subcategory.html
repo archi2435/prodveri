@@ -28,7 +28,7 @@
                     <div class="card-body text-center ">
                         <img src="{{ i.image.url }}" class="card-img-top  pl-sm-5 pr-sm-5 pl-md-3 pr-md-3">
                         <h6 class="card-subtitle text-muted my-1">{{ i.text }}</h6>
-                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price }} ₽</b></h5> 
+                        <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price|intcomma }} ₽</b></h5> 
                     </div>
                     </a>
                 </div>
