@@ -16,32 +16,38 @@
 <hr>
 
 
-<div class="card mb-3 bg-light card-how mb-4 mt-4" style="">
-    <div class="row g-0">
-      <div class="col-md-4 text-center py-4">
-        <img src="{{ furnite.image.url }}" alt="..." style="width: 200px;">
-      </div>
-      <div class="col-md-8">
+<div class="card mt-4 bg-light card-how mb-4">
+  <div class="row">
+    <div class="col-md-4 text-center pt-5">
+      <img src="{{ furnite.image.url }}" alt="..." style="width: 250px;">
+    </div>
+    <div class="col-md-8">
+      <div class="container">
         <div class="card-body">
-          <h5 class="card-title display-4">{{ furnite.title }}</h5>
-          <form id=BuyForm>
-          <div class="" >
-            <button type="button" class="btn btn-lg btn-outline-primary mt-2 mb-3  w-100">
+          <h5 class="ml-2 ml-md-0 card-title display-4">{{ furnite.title }}</h5>
+          <h6 class="ml-2 ml-md-0 lead text-muted">Артикул: <b>{{ furnite.slug }}</b></h6>
+
+          <form id="BuyForm">
+          <div class="pt-3 mt-3 ">
+            <input type="checkbox" class="btn-check" name="oplata" id="option1" autocomplete="on" value="{{ furnite.price }}" checked >
+            <label for="option1" type="button" class="btn btn-lg btn-outline-primary mt-sm-5 mb-3 disabled w-100">
               <h4 class="lead" style="font-size: 1.5em;">Стоимость</h4>
               <h4 class="lead" style="font-size: 1.4em;">{{ furnite.price|intcomma }} ₽</h4>
-            </button>
+            </label>
             <br>
             <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{furnite.title}}" data-price="{{ furnite.price }}">
               <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
             </button>
           </div>
           </form>
-        </div>       
-      </div>
+        </div>
+      </div>       
     </div>
-    <div class="card-body">
-      <p class="card-text">{{ furnite.dist|linebreaks }}</p>
-    </div>
+  </div>
+  <div class="card-body mx-4 mt-3">
+  <hr>
+    <p class="card-text">{{ furnite.dist|linebreaks }}</p>
+  </div>
     
 </div>
 

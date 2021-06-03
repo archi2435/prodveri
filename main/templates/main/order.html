@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    
+<h3 class="mb-5 mt-mb-3 mb-md-5 lead text-center" style="font-size: 2em;"><b>Оформление заказа</b></h3>
+
+<div class="text-center mx-md-5 row row-cols-1 row-cols-md-2">
+  <div class="col h-100 px-md-3">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.first_name }}
+      <br>
+      {{ form.Middle_name }}
+      <br>
+      {{ form.Phone }}
+      <br>
+      {{ form.Address }}
+      <br>
+      {{ form.Cart }}
+      <br>
+      <span>{{ error }}</span>
+      <blockquote class="blockquote text-muted pb-2 d-md-none" style="font-size: 23px">
+        <span class="Total-pr"></span>
+      </blockquote>
+      <button id="btn-order" class="btn btn-success w-100" type="submit" style="height: 40px;">Оставить заявку</button>
+    </form>
+  </div>
+  <div class="col h-100 px-md-3 mt-3 mt-md-0">
+    <blockquote class="blockquote text-muted my-3 my-md-0 d-none d-md-block" style="font-size: 23px">
+      <span class="Total-pr"></span>
+      <br><br>
+      <p>Заполните форму, после чего мы позвоним вам по указанному номеру. Мы увидим весь тот товар, который вы добавили
+        в корзину покупок, при оформлении заказа.
+      </p>
+      
+    </blockquote>
+    <blockquote class="blockquote text-muted my-3 my-md-0 d-md-none" style="font-size: 23px">
+      <p>Заполните форму, после чего мы позвоним вам по указанному номеру. Мы увидим весь тот товар, который вы добавили
+        в корзину покупок, при оформлении заказа.
+      </p>  
+    </blockquote>
+  </div>
+</div>
+
+<div id="cart-list" class="">
+
+</div>
+
+
+{% endblock %}

@@ -48,6 +48,7 @@ function ShowCart(){
     if ($.isEmptyObject(cart)){
         var out = '<li><a class="dropdown-item lead disabled" href="#">Корзина пуста</a></li>'
         $('.basket-items').html(out)
+        price = 0
     }
     else {
         var out = ''
@@ -55,7 +56,7 @@ function ShowCart(){
             //out += '<li><a class="dropdown-item lead" href="'+'http://127.0.0.1:8000/post/'+cart[i][3]+'">' + cart[i][0] + ' --- ' + cart[i][1] +'₽</a></li>';
             //out += '<li><a class="dropdown-item" href="'+'http://127.0.0.1:8000/post/'+cart[i][3]+'"><div class="card card-how-low" style="width:300px"><div class="card-body"><div class="row"><div class="col-7"><h5 class="card-title">' + cart[i][0] + '</h5><h6 class="card-subtitle mb-2 text-muted ">' + cart[i][1] +'</h6></div><div class="col-5"><h5>123123</h5></div></div></div></div></a></li>';
             out +='<li>\
-                        <div class="card card-how-low mx-2 my-2" style="width:325px">\
+                        <div class="card card-how-low mx-1 mx-sm-2 my-2" style="width:325px">\
                             <div class="card-body"><div class="row">\
                                 <div class="col-6">\
                                     <h5 class="card-title">' + cart[i][0] + '</h5>\
@@ -93,14 +94,15 @@ function ShowCart(){
                         <h5 class="lead mt-2 text-muted" style="font-size:18px"><b>Стоимость: '+price+' ₽</b></h5>\
                     </div>\
                     <div class="col-5 text-right">\
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#OrderForm">\
+                        <a href="http://127.0.0.1:8000/order" class="btn btn-primary">\
                         Покупка\
-                        </button>\
+                        </a>\
                     </div>\
                     </div>\
                 </li>';
     }
     
+    OrderCart()
     $('.basket-items').html(out)
     $('.plus').on('click',PlusDoor)
     $('.minus').on('click',MinusDoor)
@@ -130,4 +132,22 @@ function TotalPrice(){
     price = 0
     for (var i in cart)
         price += Number(cart[i][1]) * cart[i][2]
+}
+
+function OrderCart(){
+    var OrderOut = ''
+    if ($.isEmptyObject(cart)){
+        $('#CartList').val('')
+        $('#btn-order').addClass('disabled');
+        $('.Total-pr').text('Похоже вы удалили все товары из корзины, но не беда, вы всегда найдёте у нас то, что вам по вкусу');
+    }
+    else {
+        for (var i in cart)
+            OrderOut += 'Товар: ' + cart[i][0] +';   Артикул: '+cart[i][3]+ ';   Цена: '+ cart[i][1] +' ₽;   Кол-во: '+cart[i][2]+ ' шт;   Ссылка: http://127.0.0.1:8000/post/'+cart[i][3]+'\n'
+            $('#CartList').val(OrderOut)
+
+        $('#CartList').val($('#CartList').val() + '\n'+'Общая стоимость: '+price+' ₽');
+        $('#btn-order').removeClass('disabled');
+        $('.Total-pr').text('Общая сумма заказа составляет: '+price+' рублей');
+    }
 }

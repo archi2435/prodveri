@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+
 User = get_user_model()
 # Create your models here.
 
@@ -9,7 +10,7 @@ User = get_user_model()
 class category(models.Model):       #   category table / таб категорий 
 
     title = models.CharField(verbose_name='Название категории', max_length=255)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -28,7 +29,7 @@ class sub_category(models.Model):       #   sub_category list / таб подк�
 
     category = models.ForeignKey(category, verbose_name='Категория', on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Подкатегория', max_length=100)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -48,7 +49,7 @@ class collection(models.Model):      #   collection list / список колл
     category = models.ForeignKey(category, verbose_name='Категория', on_delete=models.CASCADE)
     sub_category = models.ForeignKey(sub_category, verbose_name="Подкатегория", on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Название коллекции', max_length=100) 
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -69,7 +70,7 @@ class catalog(models.Model):        #   catalog list / список товара
     sub_category = models.ForeignKey(sub_category, verbose_name="Подкатегория", on_delete=models.CASCADE, null=True, blank=True)
     collection = models.ForeignKey(collection, verbose_name="Коллекция", on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(verbose_name='Название', max_length=100)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
     price = models.CharField(verbose_name='Цена', max_length=20)
     max_price = models.CharField(verbose_name='Цена за комплект (необязательно)', max_length=20, blank=True)
     image = models.ImageField(verbose_name='Основное фото')
@@ -104,7 +105,7 @@ class Sizes(models.Model):      #   size ticets / таб заявок для з�
 class Furnite_category(models.Model):       #   furnite categories / категории фурнитуры
 
     title = models.CharField(verbose_name='Название', max_length=50)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -124,7 +125,7 @@ class Furnite_sub_category(models.Model):       #   furnite sub_category / по�
    
     category = models.ForeignKey(Furnite_category, verbose_name='Категория', on_delete=models.CASCADE)
     title = models.CharField(verbose_name='Подкатегория', max_length=100)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -147,7 +148,7 @@ class Furnite(models.Model):        #   furnite catalog list / список фу
     image = models.ImageField()
     dist = models.TextField(verbose_name='Описание / назваие коллекции')
     price = models.CharField(verbose_name='Цена', max_length=20)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(verbose_name='Артикул', unique=True)
 
     def __str__(self):
         return self.title
@@ -178,15 +179,15 @@ class News(models.Model):       #   news tab / Новости
 
 class Orders(models.Model):
 
-    Date = models.DateTimeField(verbose_name='Дата заказа', auto_now_add=True)
     first_name = models.CharField(verbose_name='Имя', max_length=30)
     Middle_name = models.CharField(verbose_name='Отчество', max_length=30)
     Phone = models.CharField(verbose_name='Номер телефона', max_length=15)
     Address = models.TextField(verbose_name='Адрес')
     Cart = models.TextField(verbose_name='Корзина')
+    Date = models.DateTimeField(verbose_name='Дата заявки', auto_now_add=True)
 
     def __str__(self):
-        return self.Date
+        return self.Address
 
     class Meta:
         verbose_name = 'Заявка'

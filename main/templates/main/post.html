@@ -61,17 +61,17 @@
       <div class="col-md-8">
         <div class="container">
           <div class="card-body">
-            <h5 class="card-title display-4">{{ post.title }}</h5><br>
-            <h6 class="lead text-muted">Артикул: <b>223-5566</b></h6>
-            <h6 class="lead text-muted">Коллекция: <b>{{ post.collection }}</b></h6>
+            <h5 class="ml-2 ml-md-0 card-title display-4">{{ post.title }}</h5><br>
+            <h6 class="ml-2 ml-md-0 lead text-muted">Артикул: <b>{{ post.slug }}</b></h6>
+            <h6 class="ml-2 ml-md-0 lead text-muted">Коллекция: <b>{{ post.collection }}</b></h6>
           
             {% if post.max_price == '' %}
-            <form id=BuyForm action="">{% csrf_token %}
-              <div class="pt-sm-5 mt-sm-5" >
+            <form id="BuyForm" action="">{% csrf_token %}
+              <div class="pt-3 mt-3 pt-sm-5 mt-sm-5" >
                 <input type="checkbox" class="btn-check" name="oplata" id="option1" autocomplete="on" value="{{ post.price }}" checked >
-                <label for="option1" type="button" class="btn btn-lg btn-outline-primary mt-sm-5 mb-3 disabled w-100">
+                <label for="option1" type="button" class="btn btn-lg btn-outline-primary mb-3 disabled w-100">
                   <h4 class="lead" style="font-size: 1.5em;">Стоимость</h4>
-                  <h4 class="lead" style="font-size: 1.4em;">{{ post.price|intcomma }} ₽</h4>
+                  <h4 class="lead" style="font-size: 1.3em;">{{ post.price|intcomma }} ₽</h4>
                 </label>
                 <br>
                 <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{post.title}}" data-categoty="{{ post.category }}" data-id="{{ post.id }}" data-slug="{{ post.slug }}">
@@ -81,8 +81,8 @@
             </form>
 
             {% else %}
-            <form id=BuyForm action="">{% csrf_token %}
-              <div class="pt-5 mt-5 btn-group btn-group-md mt-5 mb-3 w-100 " role="group" aria-label="Basic outlined example"> 
+            <form id="BuyForm" action="">{% csrf_token %}
+              <div class="pt-3 mt-3 pt-sm-5 mt-sm-5 btn-group btn-group-md mb-4 w-100 " role="group" aria-label="Basic outlined example"> 
                 <input type="radio" class="btn-check" name="oplata" id="option1" autocomplete="off" value="{{ post.price }}">             
                 <label id="option1" class="btn btn-outline-primary rounded mr-1" for="option1">
                   <h4 class="lead" style="font-size: 1.5em;">За полотно</h4>

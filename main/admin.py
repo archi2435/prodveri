@@ -16,7 +16,13 @@ class catalogAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
     list_display = ('title', 'image_tag', 'category', 'sub_category', 'collection', 'price')
-    readonly_fields = ('image_tag',)    
+    readonly_fields = ('image_tag',)   
+
+class OrdersList(admin.ModelAdmin):
+
+    list_display = ('Date', 'first_name', 'Middle_name', 'Address', 'Phone', 'Cart')
+    readonly_fields = ('Date', 'first_name', 'Middle_name', 'Phone', 'Address', 'Cart',)
+
 
 admin.site.register(category, AutoSlug)
 admin.site.register(catalog, catalogAdmin)
@@ -27,4 +33,4 @@ admin.site.register(Furnite_category, AutoSlug)
 admin.site.register(Furnite_sub_category, AutoSlug)
 admin.site.register(Furnite)
 admin.site.register(News)
-admin.site.register(Orders)
+admin.site.register(Orders, OrdersList)

@@ -6,14 +6,14 @@
 <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Новости</b></h3>
 {% for n in news %}
 
-    <div class="card card-how h-100 my-4">
+    <div class="card card-how my-4">
         <h5 class="card-header lead"><b>{{ n.title }}</b></h5>
         <div class="card-body">
             <p>{{ n.text|linebreaks }}</p>
         </div>
     </div>
 
-    <hr>
+    
 
 {% endfor %}
 </div>

@@ -3,18 +3,32 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
+from .forms import OrderForm
 
 # Create your views here.
 
 
 
 def base(request):      #   Base template / Базовый шаблон 
+
+    error = ''
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'Форма была неверной'
+
     sub_category_navbar = sub_category.objects.all
     catigories_navbar = category.objects.all
+    form = OrderForm()
 
     context = {
         'sub_category_navbar' : sub_category_navbar,
         'catigories_navbar' : catigories_navbar,
+        'form': form,
+        'error': error,
     }
 
     return render(request, 'main/base.html', context = context)
@@ -44,16 +58,31 @@ def index(request):     #   main template / Домашняя страница
 
 
 
-def sizes(request):     #   size template / Страница оформления замеров
+def order(request):     #   size template / Страница оформления замеров
+
+    error = ''
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            error = 'Форма была неверной'
+
     sub_category_navbar = sub_category.objects.all
     catigories_navbar = category.objects.all
+    cart_catalog = catalog.objects.order_by('-id')
+    form = OrderForm()
 
     context = {
         'sub_category_navbar' : sub_category_navbar,
         'catigories_navbar' : catigories_navbar,
+        'catalog': cart_catalog,
+        'form': form,
+        'error' : error,
     }
 
-    return render(request, 'main/sizes.html', context = context)
+    return render(request, 'main/order.html', context = context)
 
 
 
