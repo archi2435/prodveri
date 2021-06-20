@@ -4,6 +4,7 @@ $(document).ready(function () {
     CheckCart()
     AddToCart()
     ShowCart()
+    ClearCart()
 });
 
 function AddToCart(){
@@ -148,6 +149,14 @@ function OrderCart(){
 
         $('#CartList').val($('#CartList').val() + '\n'+'Общая стоимость: '+price+' ₽');
         $('#btn-order').removeClass('disabled');
-        $('.Total-pr').text('Общая сумма заказа составляет: '+price+' рублей');
+        $('.Total-pr').text('Общая сумма заказа составляет: '+price+' рублей');    
     }
+    
+}
+
+function ClearCart(){
+    var form_clear = $('#CartClear')
+    form_clear.on('submit', function(e) {
+        localStorage.clear();
+    })
 }

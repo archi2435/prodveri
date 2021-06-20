@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<div class="text-center container">
+    <h3 class="my-5 lead text-center" style="font-size: 29px;">Ваша заявка была принята, мы свяжемся с вами в ближайшее время</h3>
+    
+    <form action="{% url 'home' %}" id="CartClear">
+    <button id="Order-done" type="submit" class="btn btn-lg btn-primary mt-2">
+        Вернуться на главную
+    </button>
+    </form>
+</div>
+
+{% endblock %}

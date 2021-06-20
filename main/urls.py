@@ -8,6 +8,7 @@ urlpatterns = [
     #path('items', views.all_items, name='all_items'),
     path('',views.index, name='home'),
     path('order', views.order, name='order'),
+    path('order_done', views.order_done, name='order_done'),
     path('news', views.news, name='news'),
     path('all_furnite', views.all_furnite, name='all_furnite'),
     path('post/<slug:post_slug>', views.show_post, name="post"),

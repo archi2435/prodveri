@@ -35,7 +35,7 @@
               <h4 class="lead" style="font-size: 1.4em;">{{ furnite.price|intcomma }} ₽</h4>
             </label>
             <br>
-            <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{furnite.title}}" data-price="{{ furnite.price }}">
+            <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{furnite.title}}" data-categoty="{{ furnite.sub_category }}" data-id = "{{ furnite.id }}" data-price="{{ furnite.price }}">
               <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
             </button>
           </div>

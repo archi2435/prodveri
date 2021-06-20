@@ -5,12 +5,11 @@ from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from .forms import OrderForm
 
-# Create your views here.
 
 
+#   Base template / Базовый шаблон 
 
-def base(request):      #   Base template / Базовый шаблон 
-
+def base(request):      
     error = ''
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -35,8 +34,9 @@ def base(request):      #   Base template / Базовый шаблон
 
 
 
+#   main template / Домашняя страница
 
-def index(request):     #   main template / Домашняя страница
+def index(request):     
     sub_category_navbar = sub_category.objects.all
     catalog_mainpage = catalog.objects.order_by('-id')[:8]
     furnite_mainpage = Furnite.objects.order_by('-id')[:8]
@@ -57,15 +57,16 @@ def index(request):     #   main template / Домашняя страница
 
 
 
+#   size template / Страница оформления замеров
 
-def order(request):     #   size template / Страница оформления замеров
+def order(request):     
 
     error = ''
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('order_done')
         else:
             error = 'Форма была неверной'
 
@@ -86,6 +87,24 @@ def order(request):     #   size template / Страница оформлени�
 
 
 
+#   size template / Страница оформления замеров
+
+def order_done(request):     
+
+    sub_category_navbar = sub_category.objects.all
+    catigories_navbar = category.objects.all
+
+    context = {
+        'sub_category_navbar' : sub_category_navbar,
+        'catigories_navbar' : catigories_navbar,
+    }
+
+    return render(request, 'main/order_done.html', context = context)    
+
+
+
+# news template / Страница новостей
+
 def news(request):
 
     sub_category_navbar = sub_category.objects.all
@@ -102,7 +121,9 @@ def news(request):
 
 
 
-def show_post(request, post_slug):      #   door post template / Страница товара (дверь)
+#   door post template / Страница товара (дверь)
+
+def show_post(request, post_slug):      
 
     post = get_object_or_404(catalog, slug=post_slug)
     catalog_post = catalog.objects.all
@@ -125,8 +146,9 @@ def show_post(request, post_slug):      #   door post template / Страниц�
 
 
 
+#   furnite post template / Страница товара (фурнитура)
 
-def show_furnite(request, furnite_slug):        #   furnite post template / Страница товара (фурнитура)
+def show_furnite(request, furnite_slug):        
 
     furnite = get_object_or_404(Furnite, slug=furnite_slug)
     furnite_post = Furnite.objects.all
@@ -144,8 +166,9 @@ def show_furnite(request, furnite_slug):        #   furnite post template / Ст
 
 
 
+#   category list / Список товара одной категории (двери)
 
-def show_category(request, category_slug):      #   category list / Список товара одной категории (двери)
+def show_category(request, category_slug):      
 
     incategory = get_object_or_404(category, slug=category_slug)
     category_catalog = catalog.objects.filter(category_id = incategory.id).order_by('-id')
@@ -169,7 +192,9 @@ def show_category(request, category_slug):      #   category list / Список
 
 
 
-def show_furnite_category(request, furnite_category_slug):      #   furnite category list / список товара одной категории (фурнитура)
+#   furnite category list / список товара одной категории (фурнитура)
+
+def show_furnite_category(request, furnite_category_slug):      
 
     incategory = get_object_or_404(Furnite_category, slug=furnite_category_slug)
     furnite = Furnite.objects.filter(category_id = incategory.id)
@@ -198,8 +223,9 @@ def show_furnite_category(request, furnite_category_slug):      #   furnite cate
 
 
 
+#   sub_category list / Список товара одной подкатегории (двери)
 
-def show_sub_category(request, sub_category_slug):      #   sub_category list / Список товара одной подкатегории (двери)
+def show_sub_category(request, sub_category_slug):      
 
     subcategory = get_object_or_404(sub_category, slug=sub_category_slug)
     catigories_navbar = category.objects.all
@@ -223,6 +249,8 @@ def show_sub_category(request, sub_category_slug):      #   sub_category list / 
     return render(request, 'main/subcategory.html', context = context)
 
 
+
+#   collection list / Список товара одной коллекции (двери)
 
 def show_collection(request, collection_slug):
 
@@ -252,6 +280,8 @@ def show_collection(request, collection_slug):
 
 
 
+#   sub_category list / Список товара одной подкатегории (фурнитура)
+
 def show_furnite_subcategory(request, furnite_subcategory_slug):
 
     subcategory = get_object_or_404(Furnite_sub_category, slug=furnite_subcategory_slug)
@@ -279,6 +309,7 @@ def show_furnite_subcategory(request, furnite_subcategory_slug):
 
 
 
+#   furnite list / Список всей фурнитуры (фурнитура)
 
 def all_furnite(request):
 

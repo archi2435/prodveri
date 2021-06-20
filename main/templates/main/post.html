@@ -20,123 +20,167 @@
 
 <hr>
 
-<!-- post block / блок поста -->
-<div class="card mt-4 bg-light card-how mb-4">
-    <div class="row">
-      <div class="col-md-4 text-center pt-4">
-        {% if post.second_image == '' %}
-        <div>
-          <img src="{{ post.image.url }}" alt="..." style="width: 200px;" class="">
-        </div>
-        {% else %}
-        <div>
-          
-          <div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item">
-                <img src="{{ post.image.url }}" style="width: 200px;" class="" alt="...">
-              </div>
-              <div class="carousel-item active">
-                <img src="{{ post.second_image.url }}" style="width: 200px;" class="" alt="...">
-              </div>
-              
-            </div>
-            <a class="carousel-control-prev ml-1" href="#carouselExampleIndicators" role="button" data-slide="prev" style="font-size: 30px;">
-              <i class="bi bi-caret-left" style="color: grey;"></i>
-              <span class="visually-hidden butto"></span>
-            </a>
-            <a class="carousel-control-next mr-1" href="#carouselExampleIndicators" role="button" data-slide="next" style="font-size: 30px;">
-              <i class="bi bi-caret-right" style="color: grey;"></i>
-              <span class="visually-hidden"></span>
-            </a>
-          </div>
-          
-        </div>
-        {% endif %}
-      </div>
-      <div class="col-md-8">
-        <div class="container">
-          <div class="card-body">
-            <h5 class="ml-2 ml-md-0 card-title display-4">{{ post.title }}</h5><br>
-            <h6 class="ml-2 ml-md-0 lead text-muted">Артикул: <b>{{ post.slug }}</b></h6>
-            <h6 class="ml-2 ml-md-0 lead text-muted">Коллекция: <b>{{ post.collection }}</b></h6>
-          
-            {% if post.max_price == '' %}
-            <form id="BuyForm" action="">{% csrf_token %}
-              <div class="pt-3 mt-3 pt-sm-5 mt-sm-5" >
-                <input type="checkbox" class="btn-check" name="oplata" id="option1" autocomplete="on" value="{{ post.price }}" checked >
-                <label for="option1" type="button" class="btn btn-lg btn-outline-primary mb-3 disabled w-100">
-                  <h4 class="lead" style="font-size: 1.5em;">Стоимость</h4>
-                  <h4 class="lead" style="font-size: 1.3em;">{{ post.price|intcomma }} ₽</h4>
-                </label>
-                <br>
-                <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{post.title}}" data-categoty="{{ post.category }}" data-id="{{ post.id }}" data-slug="{{ post.slug }}">
-                  <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
-                </button>
-              </div>
-            </form>
+<!-- post cart / Карточка поста -->
 
-            {% else %}
-            <form id="BuyForm" action="">{% csrf_token %}
-              <div class="pt-3 mt-3 pt-sm-5 mt-sm-5 btn-group btn-group-md mb-4 w-100 " role="group" aria-label="Basic outlined example"> 
-                <input type="radio" class="btn-check" name="oplata" id="option1" autocomplete="off" value="{{ post.price }}">             
-                <label id="option1" class="btn btn-outline-primary rounded mr-1" for="option1">
-                  <h4 class="lead" style="font-size: 1.5em;">За полотно</h4>
-                  <h4 class="lead" style="font-size: 1.6em;"><b>{{ post.price|intcomma }} ₽</b></h4>
-                </label>
-                <input type="radio" class="btn-check" name="oplata" id="option2" autocomplete="off" value="{{ post.max_price }}">
-                <label id="option2" class="btn btn-outline-primary rounded ml-1" for="option2">
-                  <h4 class="lead" style="font-size: 1.5em;">За комплект</h4>
-                  <h4 class="lead" style="font-size: 1.6em;"><b>{{ post.max_price|intcomma }} ₽</b></h4>
-                </label>             
-              </div>
-              <br>
-                <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mr-5 mt-2 w-100" data-image="{{ post.image.url }}" data-name="{{post.title}}" data-categoty="{{ post.category }}" data-id = "{{ post.id }}" data-slug = "{{ post.slug }}">
-                  <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
-                </button>
-            </form>
-          
-            {% endif %}
+<div class="card mt-4 bg-light card-how mb-4">
+  <div class="row">
+
+    <!-- Первая колонка карточки -->
+    <div class="col-md-4 text-center pt-4">
+
+      {% if post.second_image == '' %}
+
+      <!-- Блок выполняется, если к товару приклепленно только одно изображение -->
+
+      <div>
+        <img src="{{ post.image.url }}" alt="..." style="width: 200px;" class="">
+      </div>
+
+      {% else %}
+
+      <!-- Блок выполняется, если у товара есть второе изображение -->
+      
+      <div>
+        <div id="carouselExampleIndicators" class="carousel slide carousel-dark" data-ride="carousel">
+
+          <!-- Карусель изо -->
+
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item">
+              <img src="{{ post.image.url }}" style="width: 200px;" class="" alt="...">
+            </div>
+            <div class="carousel-item active">
+              <img src="{{ post.second_image.url }}" style="width: 200px;" class="" alt="...">
+            </div>            
           </div>
+
+          <!-- Иконки переключения изо -->
+
+          <a class="carousel-control-prev ml-1" href="#carouselExampleIndicators" role="button" data-slide="prev" style="font-size: 30px;">
+            <i class="bi bi-caret-left" style="color: grey;"></i>
+            <span class="visually-hidden butto"></span>
+          </a>
+          <a class="carousel-control-next mr-1" href="#carouselExampleIndicators" role="button" data-slide="next" style="font-size: 30px;">
+            <i class="bi bi-caret-right" style="color: grey;"></i>
+            <span class="visually-hidden"></span>
+          </a>
+
         </div>
       </div>
+
+      {% endif %}
+
     </div>
-    <div class="card-body mx-4 mt-3">
-      <hr>
-      <p class="card-text lead pt-1">{{ post.sub_name|linebreaks }}</p>
+
+    <!-- Вторая колонка карточки -->
+    <div class="col-md-8">
+      <div class="container">
+        <div class="card-body">
+
+          <!-- Детали товара -->
+
+          <h5 class="ml-2 ml-md-0 card-title display-4">{{ post.title }}</h5><br>
+          <h6 class="ml-2 ml-md-0 lead text-muted">Артикул: <b>{{ post.slug }}</b></h6>
+          <h6 class="ml-2 ml-md-0 lead text-muted">Коллекция: <b>{{ post.collection }}</b></h6>
+
+          <!-- Блок выполняется если у товара только одна цена -->
+          {% if post.max_price == '' %}
+
+          <form id="BuyForm" action="">{% csrf_token %}
+            <div class="pt-3 mt-3 pt-sm-5 mt-sm-5" >
+
+              <input type="checkbox" class="btn-check" name="oplata" id="option1" autocomplete="on" value="{{ post.price }}" checked >
+              
+              <label for="option1" type="button" class="btn btn-lg btn-outline-primary mb-3 disabled w-100">
+                <h4 class="lead" style="font-size: 1.5em;">Стоимость</h4>
+                <h4 class="lead" style="font-size: 1.3em;">{{ post.price|intcomma }} ₽</h4>
+              </label>
+              
+              <br>
+
+              <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mt-2 w-100" data-name="{{post.title}}" data-categoty="{{ post.category }}" data-id="{{ post.id }}" data-slug="{{ post.slug }}">
+                <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
+              </button>
+
+            </div>
+          </form>
+
+          <!-- Блок выполняется, если у товара есть второй ценник (за комплект) -->
+          {% else %}
+
+          <form id="BuyForm" action="">{% csrf_token %}
+            <div class="pt-3 mt-3 pt-sm-5 mt-sm-5 btn-group btn-group-md mb-4 w-100 " role="group" aria-label="Basic outlined example"> 
+              <input type="radio" class="btn-check" name="oplata" id="option1" autocomplete="off" value="{{ post.price }}">             
+              
+              <label id="option1" class="btn btn-outline-primary rounded mr-1" for="option1">
+                <h4 class="lead" style="font-size: 1.5em;">За полотно</h4>
+                <h4 class="lead" style="font-size: 1.6em;"><b>{{ post.price|intcomma }} ₽</b></h4>
+              </label>
+
+              <input type="radio" class="btn-check" name="oplata" id="option2" autocomplete="off" value="{{ post.max_price }}">
+              
+              <label id="option2" class="btn btn-outline-primary rounded ml-1" for="option2">
+                <h4 class="lead" style="font-size: 1.5em;">За комплект</h4>
+                <h4 class="lead" style="font-size: 1.6em;"><b>{{ post.max_price|intcomma }} ₽</b></h4>
+              </label> 
+
+            </div>
+            <br>
+
+              <button id="buy-btn" type="submit" class="btn btn-warning btn-lg mr-5 mt-2 w-100" data-name="{{post.title}}" data-categoty="{{ post.category }}" data-id = "{{ post.id }}" data-slug = "{{ post.slug }}">
+                <h4 class="lead" style="font-size: 1.5em;"><b>Добавить в корзину</b></h4>
+              </button>
+
+          </form>
+        
+          {% endif %}
+        </div>       
+      </div>
     </div>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="card-body mx-4 mt-3">
+    <hr>
+    <p class="card-text lead pt-1">{{ post.sub_name|linebreaks }}</p>
+  </div>
 
 </div>
 
+
+<!-- Вывод товара одной коллекции -->
 {% if post.collection != Null and post.collection != '' %}
 <hr>
 <h3 class="py-4 lead text-center" style="font-size: 2em;"><b>Коллекция "{{ post.collection }}"</b></h3>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 pb-4">
+
   {% for i in catalog_post %}
     {% if i.collection == post.collection %}
 
     <div class=" col my-3">
-        <div class="card card-how h-100"> 
-            <a class="text-decoration-none" href="{{ i.get_absolute_url }}" data-bs-toggle="modal" style="color: black">
-            <h5 class="card-header lead text-center"><b>{{ i.title }}</b></h5>
-            <div class="card-body text-center">
-                
-                <div class="card__img">
-                    <img src="{{ i.image.url }}" class=" card__img-wrapper">
-                    {% if i.second_image  %}
-                    <img src="{{ i.second_image.url }}" class=" card__img-wrapper">
-                    {% endif %}
-                </div>
-                <div class="">
-                  <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price|intcomma }} ₽</b></h5>
-                </div>
-            </div>
-            </a>
-        </div>
+      <div class="card card-how h-100"> 
+        <a class="text-decoration-none" href="{{ i.get_absolute_url }}" data-bs-toggle="modal" style="color: black">
+          <h5 class="card-header lead text-center"><b>{{ i.title }}</b></h5>
+          <div class="card-body text-center">
+              
+              <div class="card__img">
+                  <img src="{{ i.image.url }}" class=" card__img-wrapper">
+                  {% if i.second_image  %}
+                  <img src="{{ i.second_image.url }}" class=" card__img-wrapper">
+                  {% endif %}
+              </div>
+              
+              <div class="">
+                <h5 class="pl-2 card-title pt-4 lead text-center" style="font-size: 1.5em;"><b>{{ i.price|intcomma }} ₽</b></h5>
+              </div>
+
+          </div>
+        </a>
+      </div>
     </div>
     {% endif %}
   {% endfor %}
